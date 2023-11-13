@@ -1,20 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './Home'; 
+import LogInSignUp from './LogInSignUp'; 
+import LetsBegin from './LetsBegin'; 
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+export default function App () {
   return (
-    <View style={styles.container}>
-      <Text style={{ FontSize: 80 }}>Hello welcome to Big Lemon App</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="LogInSignUp" component={LogInSignUp} />
+        <Stack.Screen name="LetsBegin" component={LetsBegin} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+

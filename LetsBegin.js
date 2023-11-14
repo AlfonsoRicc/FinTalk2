@@ -1,21 +1,33 @@
 import React, { useState } from 'react';
 import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const LetsBegin = () => {
+const navigation = useNavigation(); 
+const [isSharePressed, setSharePressed] = useState(false);
+const [isLurkPressed, setLurkPressed] = useState(false);
+  
 const handleCreateAccountPress = () => {
-        navigation.navigate('LetsBegin');
-      };
+  if (isSharePressed) {
+    navigation.navigate('FieldsOfExpertise');
+  }
 
-const handleSharePress = () => {
-  setSharePressed(!isSharePressed);
-};
-const handleLurkPress = () => {
-  setLurkPressed(!isLurkPressed);
-};
+  const handleSharePress = () => {
+    setSharePressed(true);
+    setLurkPressed(false); 
+  };
+  
+  const handleLurkPress = () => {
+    setSharePressed(false); 
+    setLurkPressed(true);
+  };
+
 const getSquareStyle = (isPressed) => ({
   backgroundColor: isPressed ? pressedColor : defaultColor,
 });
+
+}
 
     return (
       <View style={styles.container}>
@@ -35,8 +47,8 @@ const getSquareStyle = (isPressed) => ({
         <View style={styles.optionContainer}>
       </View>
       <View style={styles.square}>
-      <TouchableOpacity style={[styles.option, getSquareStyle=(isSharePressed)]}
-      onPress={handleSharePress}>
+      <TouchableOpacity onPress={handleSharePress}
+      style={[styles.option, getSquareStyle=(isSharePressed)]}>
       <View style={styles.iconTextWrapper}>
           <Icon name="share-variant" size={24} color="#54D7B7" />
           </View>
@@ -45,8 +57,8 @@ const getSquareStyle = (isPressed) => ({
         </TouchableOpacity>
       </View>
       <View style={styles.square}>
-      <TouchableOpacity style={[styles.option, getSquareStyle=(isLurkPressed)]}
-      onPress={handleLurkPress}>
+      <TouchableOpacity onPress={handleLurkPress} 
+      style={[styles.option, getSquareStyle=(isLurkPressed)]}>
       <View style={styles.iconTextWrapper}>
           <Icon name="eye-outline" size={24} color="#54D7B7" />
           </View>
@@ -115,8 +127,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         width: '80%', 
         alignItems: 'center',
-        position: 'absolute', // Position the button absolutely
-        bottom: 50, // Distance from the bottom of the screen
+        position: 'absolute', 
+        bottom: 50, 
         alignSelf: 'center',  
       },
       buttonText: {
@@ -127,24 +139,24 @@ const styles = StyleSheet.create({
       iconTextWrapper: {
         alignItems: 'left', 
         paddingLeft: 10, 
-        paddingTop: 5, // This will center the icon and text horizontally
+        paddingTop: 5, 
       },
       squaresContainer: {
-        flexDirection: 'row',  // Aligns children (squares) in a row
-        justifyContent: 'center', // Centers the squares horizontally
-        alignItems: 'center', // Vertically centers children
-        height: 100, // Adjust as needed
-        marginVertical: 20, // Adds vertical space around the container
+        flexDirection: 'row',  
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: 100, 
+        marginVertical: 20, 
       },
       square: {
-        width: 148,  // Width of the square
-        height: 134, // Height of the square, same as width to make it a perfect square
-        backgroundColor: '#171C24', // Adjust the color as needed
-        marginLeft: 20, // Margin on the left side
-        marginRight: 20, // Margin on the right side
+        width: 148, 
+        height: 134, 
+        backgroundColor: '#171C24', 
+        marginLeft: 20,
+        marginRight: 20, 
         borderRadius: 8, 
         borderWidth: 1,
-        borderColor: '#8FA3C8', // Add any additional styling such as borderRadius, borderWidth, etc.
+        borderColor: '#8FA3C8', 
       },
       optionText: {
         fontSize: 16,

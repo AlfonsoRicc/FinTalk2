@@ -2,16 +2,12 @@ import React, { useState } from 'react';
 import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
+import JoinExpertConversationButton from './JoinTheExperts';
 
 const LetsBegin = () => {
 const navigation = useNavigation(); 
 const [isSharePressed, setSharePressed] = useState(false);
 const [isLurkPressed, setLurkPressed] = useState(false);
-  
-const handleCreateAccountPress = () => {
-  if (isSharePressed) {
-    navigation.navigate('FieldsOfExpertise');
-  }
 
   const handleSharePress = () => {
     setSharePressed(true);
@@ -24,10 +20,17 @@ const handleCreateAccountPress = () => {
   };
 
 const getSquareStyle = (isPressed) => ({
-  backgroundColor: isPressed ? pressedColor : defaultColor,
+  backgroundColor: isPressed ? '#54D7B7' : 'transparent',
 });
 
-}
+const handleContinuePress = () => {
+  if (isSharePressed) {
+    navigation.navigate('FieldsOfExpertise');
+  } else if (isLurkPressed) {
+    navigation.navigate('Home')
+  }
+
+};
 
     return (
       <View style={styles.container}>
@@ -48,7 +51,7 @@ const getSquareStyle = (isPressed) => ({
       </View>
       <View style={styles.square}>
       <TouchableOpacity onPress={handleSharePress}
-      style={[styles.option, getSquareStyle=(isSharePressed)]}>
+      style={[styles.optionText, getSquareStyle(isSharePressed)]}>
       <View style={styles.iconTextWrapper}>
           <Icon name="share-variant" size={24} color="#54D7B7" />
           </View>
@@ -58,7 +61,7 @@ const getSquareStyle = (isPressed) => ({
       </View>
       <View style={styles.square}>
       <TouchableOpacity onPress={handleLurkPress} 
-      style={[styles.option, getSquareStyle=(isLurkPressed)]}>
+      style={[styles.optionText, getSquareStyle(isLurkPressed)]}>
       <View style={styles.iconTextWrapper}>
           <Icon name="eye-outline" size={24} color="#54D7B7" />
           </View>
@@ -67,10 +70,10 @@ const getSquareStyle = (isPressed) => ({
         </TouchableOpacity>
       </View>
     </View>
-        <TouchableOpacity style={styles.button} onPress={handleCreateAccountPress}>
+        <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
       <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
-      </View>
+       </View>
     );
   };
 
@@ -137,7 +140,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
       },
       iconTextWrapper: {
-        alignItems: 'left', 
+        alignItems: 'flex-start', 
         paddingLeft: 10, 
         paddingTop: 5, 
       },
@@ -168,7 +171,7 @@ const styles = StyleSheet.create({
       optionSubtext: {
         fontSize: 16,
         color: '#8FA3C8', 
-        fontWeight: 'regular',
+        fontWeight: 'normal',
         paddingTop: 10,
         paddingLeft: 10,
       }

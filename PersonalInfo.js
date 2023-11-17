@@ -3,32 +3,16 @@ import { View, Image, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } 
 import { useNavigation } from '@react-navigation/native';
 import ProgressBar from './ProgressBar';
 
-const FieldsOfExpertise = () => {
+const PersonalInfo = () => {
   const navigation = useNavigation(); 
   const steps = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5']; 
-  const currentStep = 1;
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const currentStep = 3;
+    
+  const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [bio, setBio] = useState('');
 
-  const categories = [ { id: 'macro', name: 'Macro' },
-  { id: 'financial_analysis', name: 'Financial Analysis' },
-  { id: 'tech', name: 'Tech'  },
-  { id: 'crypto', name: 'Crypto' }, 
-  { id: 'EM', name: 'EM' }, 
-  { id: 'commodities', name: 'Commodities' }, 
-  { id: 'bottom-up', name: 'Bottom Up' }, 
-  { id: 'risk', name: 'Risk Management' },
-  { id: 'corporate_finance', name: 'Corporate Finance'},
-  { id: 'alternatives', name: 'Alts' },
-  ];
-
-  const handleContinuePress = () => {navigation.navigate('WorkHistory')};
-
-  const handleSelectCategory = (category) => {
-  };
-
-  const handleRemoveCategory = (category) => {
-  };
+  const handleContinuePress = () => {navigation.navigate('')};
 
   const renderItem = ({ item }) => {
     const isSelected = selectedCategories.some(c => c.id === item.id);
@@ -46,6 +30,20 @@ const FieldsOfExpertise = () => {
     );
   };
 
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
 
 return (
 <View style={styles.container}>
@@ -56,26 +54,32 @@ return (
   /> 
 </View>
     <ProgressBar steps={steps} currentStep={currentStep} />
-     <Text style={styles.step1}>STEP 1</Text>
+     <Text style={styles.step1}>STEP 3</Text>
       <View style={styles.textWrapper}>
-          <Text style={styles.textPrimary}>What are your fields of expertise? </Text>
-          <Text style={styles.subtitle}>Choose up to three topics where you believe you can be helpful to the community</Text>
+          <Text style={styles.textPrimary}>Share Some Info About Yourself</Text>
   </View>
-    <TextInput
-      style={styles.searchBar}
-      placeholder="Search microcategory"
-      onChangeText={setSearchTerm}
-      value={searchTerm}
+  <View style={styles.imagePlaceholder}>
+        {/* Implement image upload logic here */}
+      </View>
+      <TextInput 
+        style={styles.input}
+        value={firstName}
+        onChangeText={setFirstName}
+        placeholder="First Name"
       />
-      <FlatList
-       data={categories.filter(category =>
-        category.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id}
-      numColumns={2} 
-      style={styles.list}
-    />
+      <TextInput 
+        style={styles.input}
+        value={lastName}
+        onChangeText={setLastName}
+        placeholder="Last Name"
+      />
+      <TextInput
+        style={styles.inputLarge}
+        value={bio}
+        onChangeText={setBio}
+        placeholder="Bio (optional)"
+        multiline
+      />
       <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
@@ -113,29 +117,32 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       textAlign: 'center',
     },
-    subtitle: {
-      fontSize: 14,
-      color: '#FFFFFF',
-      textAlign: 'center',
-      margin: 20,
+    imagePlaceholder: {
+      width: 100, 
+      height: 50, 
+      color: "#FFFFFF",
     },
-    searchBar: {
-      height: 40,
-      width: '80%',
-      margin: 12,
-      borderWidth: 1,
-      padding: 10,
-      backgroundColor: '#FFF',
-      borderRadius: 5, 
-    },    
+    input: {
+        backgroundColor: '#8FA3C8',
+        padding: 10,
+        marginVertical: 4,
+        marginHorizontal: 4,
+        width: '35%',
+        borderRadius: 5,
+    },
+    inputLarge: {
+        backgroundColor: '#8FA3C8',
+        padding: 10,
+        marginVertical: 4,
+        marginHorizontal: 4,
+        width: '35%',
+        borderRadius: 5,
+    },
     step1: {
       fontSize: 12,
       color: '#FFFFFF',
       textAlign: 'center',
       margin: 20,
-    },
-    Flatlist: {
-      width: '100%',
     },
     item: {
       backgroundColor: '#8FA3C8',
@@ -176,4 +183,4 @@ const styles = StyleSheet.create({
     },
   })
 
-export default FieldsOfExpertise;
+export default PersonalInfo;

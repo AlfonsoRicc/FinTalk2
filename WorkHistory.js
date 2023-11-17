@@ -3,26 +3,25 @@ import { View, Image, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } 
 import { useNavigation } from '@react-navigation/native';
 import ProgressBar from './ProgressBar';
 
-const FieldsOfExpertise = () => {
+const WorkHistory = () => {
   const navigation = useNavigation(); 
   const steps = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5']; 
-  const currentStep = 1;
+  const currentStep = 2;
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const categories = [ { id: 'macro', name: 'Macro' },
-  { id: 'financial_analysis', name: 'Financial Analysis' },
-  { id: 'tech', name: 'Tech'  },
-  { id: 'crypto', name: 'Crypto' }, 
-  { id: 'EM', name: 'EM' }, 
-  { id: 'commodities', name: 'Commodities' }, 
-  { id: 'bottom-up', name: 'Bottom Up' }, 
-  { id: 'risk', name: 'Risk Management' },
-  { id: 'corporate_finance', name: 'Corporate Finance'},
-  { id: 'alternatives', name: 'Alts' },
+  const categories = [ { id: 'sports', name: 'Sports' },
+  { id: 'arts_crafts', name: 'Arts and Crafts' },
+  { id: 'gaming', name: 'Gaming'  },
+  { id: 'culinary_arts', name: 'Culinary Arts' }, 
+  { id: 'travel', name: 'Travel' }, 
+  { id: 'contentCreation', name: 'Content Creation' }, 
+  { id: 'collecting', name: 'Collecting' }, 
+  { id: 'strategy_games', name: 'Strategy Games' },
+  { id: 'outdoor_nature', name: 'Outdoors'},
   ];
 
-  const handleContinuePress = () => {navigation.navigate('WorkHistory')};
+  const handleContinuePress = () => {navigation.navigate('PersonalInfo')};
 
   const handleSelectCategory = (category) => {
   };
@@ -56,14 +55,14 @@ return (
   /> 
 </View>
     <ProgressBar steps={steps} currentStep={currentStep} />
-     <Text style={styles.step1}>STEP 1</Text>
+     <Text style={styles.step1}>STEP 2</Text>
       <View style={styles.textWrapper}>
-          <Text style={styles.textPrimary}>What are your fields of expertise? </Text>
-          <Text style={styles.subtitle}>Choose up to three topics where you believe you can be helpful to the community</Text>
+          <Text style={styles.textPrimary}>Tell Us About Your Work-Life Balance </Text>
+          <Text style={styles.subtitle}>Your life experience and hobbies define you just as much as the work you do</Text>
   </View>
     <TextInput
       style={styles.searchBar}
-      placeholder="Search microcategory"
+      placeholder="Search hobbies and interests"
       onChangeText={setSearchTerm}
       value={searchTerm}
       />
@@ -176,4 +175,5 @@ const styles = StyleSheet.create({
     },
   })
 
-export default FieldsOfExpertise;
+
+export default WorkHistory;

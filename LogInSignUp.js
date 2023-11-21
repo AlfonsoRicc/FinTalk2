@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const LogInSignUp = () => {
   const navigation = useNavigation(); 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isButtonEnabled, setButtonEnabled] = useState(false);
+
+  const validateEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
+  const handleEmailChange = (text) => {
+    setEmail(text);
+    setPassword(text);
+    setButtonEnabled(validateEmail(text));
+  };
 
   const handleCreateAccountPress = () => {
+    if (isButtonEnabled) {
+      console.log('Button Pressed with Valid Email');
     navigation.navigate('LetsBegin');
   };
+}
 
   return (
     <View style={styles.container}>
@@ -18,27 +35,24 @@ const LogInSignUp = () => {
         />
         </View>
         <View style={styles.textWrapper}>
-      <Text style={styles.textPrimary}>Create an account
+      <Text style={styles.textPrimary}>Finance Skills That Have an Impact
       </Text>
-      <Text style={styles.subtitle}>Noosk is the place where you can share your knowledge, crafts or skills </Text>
+      <Text style={styles.subtitle}>Noosk is the place where your knowledge makes a difference </Text>
       </View>
       <TextInput
         style={styles.input}
         placeholder="Enter your email"
         keyboardType="email-address"
+        onChangeText={handleEmailChange}
       />
       <TextInput
         style={styles.input}
         placeholder="Choose a password"
-        secureTextEntry={true}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm your password"
-        secureTextEntry={true}
-      />
+        keyboardType='password'
+        onChangeText={handleEmailChange}
+        />
       <TouchableOpacity style={styles.button} onPress={handleCreateAccountPress}>
-      <Text style={styles.buttonText}>Create Your Account</Text>
+      <Text style={styles.buttonText}>Start Your Journey</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.smallButton} onPress={() => { navigation.navigate('Home') }}>
         <Text style={styles.smallButtonText}>Back</Text>
@@ -67,21 +81,23 @@ const styles = StyleSheet.create({
     resizeMode: 'contain', 
   },
   textWrapper: {
-    padding: 10,
-    margin: 0,
-    paddingTop: 50,
+    width: '100%',
+    padding: 20,
+    marginTop: 30,
+    marginBottom: 15,
   },
   textPrimary: {
     fontSize: 35,
     color: "#171C24",
     fontWeight: 'bold',
-    textAlign: 'left',
+    textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
     color: '#171C24',
-    textAlign: 'left',
-    paddingTop: 20
+    textAlign: 'center',
+    paddingTop: 20,
+    paddingHorizontal: 15,
   },
   input: {
     height: 40,

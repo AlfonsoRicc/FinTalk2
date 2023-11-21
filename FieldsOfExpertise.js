@@ -22,13 +22,26 @@ const FieldsOfExpertise = () => {
   { id: 'alternatives', name: 'Alts' },
   ];
 
-  const handleContinuePress = () => {navigation.navigate('WorkHistory')};
+  const handleContinuePress = () => {
+    if (selectedCategories.length > 0) {navigation.navigate('WorkHistory');
+  } else {
+    alert('Please select at least one field of expertise.');
+  }
+};
+
 
   const handleSelectCategory = (category) => {
+    if (selectedCategories.includes(category)) { 
+      setSelectedCategories(selectedCategories.filter(c => c.id !== category.id));
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
   };
 
   const handleRemoveCategory = (category) => {
+    setSelectedCategories(selectedCategories.filter(c => c.id !== category.id));
   };
+
 
   const renderItem = ({ item }) => {
     const isSelected = selectedCategories.some(c => c.id === item.id);
@@ -58,7 +71,7 @@ return (
     <ProgressBar steps={steps} currentStep={currentStep} />
      <Text style={styles.step1}>STEP 1</Text>
       <View style={styles.textWrapper}>
-          <Text style={styles.textPrimary}>What are your fields of expertise? </Text>
+          <Text style={styles.textPrimary}>What do you focus on? </Text>
           <Text style={styles.subtitle}>Choose up to three topics where you believe you can be helpful to the community</Text>
   </View>
     <TextInput
@@ -76,7 +89,7 @@ return (
       numColumns={2} 
       style={styles.list}
     />
-      <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
+      <TouchableOpacity style={[styles.button, selectedCategories.length === 0 && styles.buttonDisabled]} onPress={handleContinuePress} disabled={selectedCategories.length === 0}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
     </View>
@@ -146,17 +159,20 @@ const styles = StyleSheet.create({
       borderRadius: 5,
     },
     itemSelected: {
-      backgroundColor: '#000',
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
+      backgroundColor: '#54D7B7',
+      padding: 10,
+      marginVertical: 4,
+      marginHorizontal: 4,
+      width: '35%',
+      borderRadius: 5,
     },
     itemText: {
       fontSize: 10,
     },
     itemRemoveText: {
-      fontSize: 18,
-      color: 'red',
+      fontSize: 14,
+      color: '#171C24',
+      textAlign: 'right',
     },
     button: {
       marginTop: 20, 
@@ -168,6 +184,11 @@ const styles = StyleSheet.create({
       position: 'absolute', 
       bottom: 50, 
       alignSelf: 'center',  
+    },
+    buttonDisabled: {
+      backgroundColor: '#FFFFFF', // Disabled button color
+      borderColor: 'grey',
+      borderWidth: 1
     },
     buttonText: {
       color: '#171C24', 

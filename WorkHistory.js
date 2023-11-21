@@ -23,11 +23,19 @@ const WorkHistory = () => {
 
   const handleContinuePress = () => {navigation.navigate('PersonalInfo')};
 
+
   const handleSelectCategory = (category) => {
+    if (selectedCategories.includes(category)) { 
+      setSelectedCategories(selectedCategories.filter(c => c.id !== category.id));
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
   };
 
   const handleRemoveCategory = (category) => {
+    setSelectedCategories(selectedCategories.filter(c => c.id !== category.id));
   };
+
 
   const renderItem = ({ item }) => {
     const isSelected = selectedCategories.some(c => c.id === item.id);
@@ -57,7 +65,7 @@ return (
     <ProgressBar steps={steps} currentStep={currentStep} />
      <Text style={styles.step1}>STEP 2</Text>
       <View style={styles.textWrapper}>
-          <Text style={styles.textPrimary}>Tell Us About Your Work-Life Balance </Text>
+          <Text style={styles.textPrimary}>What do you do when you're not working? </Text>
           <Text style={styles.subtitle}>Your life experience and hobbies define you just as much as the work you do</Text>
   </View>
     <TextInput
@@ -75,8 +83,11 @@ return (
       numColumns={2} 
       style={styles.list}
     />
-      <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
+      <TouchableOpacity style={[styles.button, selectedCategories.length === 0 && styles.buttonDisabled]} onPress={handleContinuePress} disabled={selectedCategories.length === 0}>
         <Text style={styles.buttonText}>Continue</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.smallButton} onPress={() => { navigation.navigate('PersonalInfo') }}>
+        <Text style={styles.smallButtonText}>Skip</Text>
       </TouchableOpacity>
     </View>
   );
@@ -145,7 +156,7 @@ const styles = StyleSheet.create({
       borderRadius: 5,
     },
     itemSelected: {
-      backgroundColor: '#000',
+      backgroundColor: '#54D7B7',
       padding: 20,
       marginVertical: 8,
       marginHorizontal: 16,
@@ -154,8 +165,9 @@ const styles = StyleSheet.create({
       fontSize: 10,
     },
     itemRemoveText: {
-      fontSize: 18,
-      color: 'red',
+      fontSize: 14,
+      color: '#171C24',
+      textAlign: 'right',
     },
     button: {
       marginTop: 20, 
@@ -165,13 +177,25 @@ const styles = StyleSheet.create({
       width: '80%', 
       alignItems: 'center',
       position: 'absolute', 
-      bottom: 50, 
+      bottom: 60, 
       alignSelf: 'center',  
     },
     buttonText: {
       color: '#171C24', 
       fontSize: 16, 
       fontWeight: 'bold',
+    },
+    smallButton: {
+      marginTop: 10,
+      padding: 5,
+      width: '80%', 
+      alignItems: 'center', 
+      bottom: 20, 
+    },
+    smallButtonText: {
+      color: '#54D7B7', 
+      fontSize: 14,
+      fontWeight: 'bold'
     },
   })
 

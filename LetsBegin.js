@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
-import JoinExpertConversationButton from './JoinTheExperts';
 
 const LetsBegin = () => {
 const navigation = useNavigation(); 
@@ -27,7 +26,7 @@ const handleContinuePress = () => {
   if (isSharePressed) {
     navigation.navigate('FieldsOfExpertise');
   } else if (isLurkPressed) {
-    navigation.navigate('Home')
+    navigation.navigate('Poll')
   }
 
 };
@@ -44,29 +43,28 @@ const handleContinuePress = () => {
           <Text style={styles.textPrimary}>Hello There. </Text>
           <Text style={styles.textPrimary}>Let's Begin! </Text>
         </View>
-        <Text style={styles.subtitle}>We built a place where knowledgeable people can have an impact </Text>
         <Text style={styles.joinAs}>WHAT WOULD YOU LIKE TO DO ON NOOSK?</Text>
         <View style={styles.squaresContainer}>
         <View style={styles.optionContainer}>
       </View>
-      <View style={styles.square}>
+      <View style={[styles.square, getSquareStyle(isSharePressed)]}>
       <TouchableOpacity onPress={handleSharePress}
-      style={[styles.optionText, getSquareStyle(isSharePressed)]}>
+      style={styles.optionText}>
       <View style={styles.iconTextWrapper}>
-          <Icon name="share-variant" size={24} color="#54D7B7" />
+          <Icon name="share-variant" size={24} color={isSharePressed ? "#171C24" : "#54D7B7"} />
           </View>
           <Text style={styles.optionText}>Share</Text>
-          <Text style={styles.optionSubtext}>Help others with your knowledge </Text>
+          <Text style={styles.optionSubtext}>Help others with your knowledge</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.square}>
+      <View style={[styles.square, getSquareStyle(isLurkPressed)]}>
       <TouchableOpacity onPress={handleLurkPress} 
-      style={[styles.optionText, getSquareStyle(isLurkPressed)]}>
+      style={styles.optionText}>
       <View style={styles.iconTextWrapper}>
-          <Icon name="eye-outline" size={24} color="#54D7B7" />
+          <Icon name="eye-outline" size={24} color={isLurkPressed ? "#171C24" : "#54D7B7"} />
           </View>
-          <Text style={styles.optionText}>Lurk</Text>
-          <Text style={styles.optionSubtext}>Learn from the best in the field</Text>
+          <Text style={styles.optionText}>Vote</Text>
+          <Text style={styles.optionSubtext}>Skip straight to our weekly poll</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -108,13 +106,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'left',
       },
-      subtitle: {
-        fontSize: 16,
-        color: '#647189',
-        textAlign: 'left',
-        paddingTop: 10,
-        margin: 40,
-      },
       joinAs: {
         fontSize: 16,
         color: '#647189',
@@ -122,6 +113,7 @@ const styles = StyleSheet.create({
         textAlign: "left",
         paddingRight: 50,
         marginLeft: 40,
+        paddingTop: 20,
       },
       button: {
         marginTop: 20, 
@@ -141,7 +133,7 @@ const styles = StyleSheet.create({
       },
       iconTextWrapper: {
         alignItems: 'flex-start', 
-        paddingLeft: 10, 
+        paddingLeft: 5, 
         paddingTop: 5, 
       },
       squaresContainer: {
@@ -165,7 +157,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'white',
         fontWeight: 'bold',
-        paddingLeft: 10,
+        paddingLeft: 5,
+        paddingRight: 5,
         paddingTop: 10,
       },
       optionSubtext: {
@@ -173,7 +166,8 @@ const styles = StyleSheet.create({
         color: '#8FA3C8', 
         fontWeight: 'normal',
         paddingTop: 10,
-        paddingLeft: 10,
+        paddingLeft: 5,
+        paddingRight: 5,
       }
     });
 

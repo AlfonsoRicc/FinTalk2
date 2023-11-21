@@ -25,31 +25,12 @@ return (
         />
         </View>
       <View style={styles.textWrapper}>
-      <Text style={styles.textPrimary}>Noosk is a place where you can inspire with your knowledge,
+      <Text style={styles.textPrimary}>Noosk is a place where finance experts can get together,
       </Text>
       <Text style={styles.textSecondary}>Finally</Text>
-      <Text style={styles.subtitle}>We built a place where knowledgeable people can have an impact </Text>
+      <Text style={styles.subtitle}>We built a place where financial professionals can have an impact </Text>
       </View>
-      <CustomButton title="Continue with email" />
-      <View style={styles.lineContainer}>
-      <View style={styles.line} />
-       <Text style={styles.textTertiary}>or</Text>
-       <View style={styles.line} />
-      </View>
-      <View style={styles.authButtons}>
-        <TouchableOpacity onPress={handleAppleLogin}>
-          <Image 
-            source={require('./assets/Frame162.png')} 
-            style={styles.appleButtonImage}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleGoogleLogin}>
-          <Image 
-            source={require('./assets/Frame160.png')} 
-            style={styles.googleButtonImage}
-          />
-        </TouchableOpacity>
-      </View>
+      <CustomButton title="Share Your Knowledge" />
       <View style={styles.footer}>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.loginText}>

@@ -10,6 +10,7 @@ import  Verification from './Verification';
 import  ShareKnowledge from './ShareKnowledge';
 import  ThankYou from './ThankYou';
 import  Poll from './Poll';
+import  ShowResults from './ShowResults'
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ export default function App () {
         <Stack.Screen name="ShareKnowledge" component={ShareKnowledge} />
         <Stack.Screen name="ThankYou" component={ThankYou} />
         <Stack.Screen name="Poll" component={Poll} />
+        <Stack.Screen name="ShowResults" component={ShowResults} />
       </Stack.Navigator>
     </NavigationContainer>
   );

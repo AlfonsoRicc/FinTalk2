@@ -12,6 +12,8 @@ const Poll = () => {
     // Submit the response to your server or handle it locally here
   };
 
+  const handleContinuePress = () => {navigation.navigate('ShowResults')};
+
   return (
     <View style={styles.container}>
       <Text style={styles.pollQuestion}>{pollQuestion}</Text>
@@ -24,6 +26,9 @@ const Poll = () => {
           <Text style={styles.pollOptionText}>{option}</Text>
         </TouchableOpacity>
       ))}
+      <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
+    <Text style={styles.buttonText}>Show Results</Text>
+    </TouchableOpacity>
     </View>
   );
 };
@@ -54,6 +59,22 @@ const styles = StyleSheet.create({
   pollOptionText: {
     textAlign: 'center',
     color: '#171C24',
+  },
+  button: {
+    marginTop: 20, 
+    backgroundColor: '#171C24', 
+    padding: 10,
+    borderRadius: 5,
+    width: '80%', 
+    alignItems: 'center',
+    position: 'absolute', 
+    bottom: 50, 
+    alignSelf: 'center',  
+  },
+  buttonText: {
+    color: '#FFF', 
+    fontSize: 16, 
+    fontWeight: 'bold',
   },
 });
 

@@ -10,14 +10,15 @@ import  Verification from './Verification';
 import  ShareKnowledge from './ShareKnowledge';
 import  ThankYou from './ThankYou';
 import  Poll from './Poll';
-import  ShowResults from './ShowResults'
+import  ShowResults from './ShowResults';
+import  Profile from './Profile'
 
 const Stack = createNativeStackNavigator();
 
 export default function App () {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="LetsBegin">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="LogInSignUp" component={LogInSignUp} />
         <Stack.Screen name="LetsBegin" component={LetsBegin} />
@@ -29,6 +30,7 @@ export default function App () {
         <Stack.Screen name="ThankYou" component={ThankYou} />
         <Stack.Screen name="Poll" component={Poll} />
         <Stack.Screen name="ShowResults" component={ShowResults} />
+        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

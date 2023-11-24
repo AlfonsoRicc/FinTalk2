@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { navigation } from '@react-navigation/native';
 
-const Poll = () => {
+const Poll = ({ navigation }) => {
   // Example poll data
   const [pollQuestion, setPollQuestion] = useState('What is your favorite asset class for the next quarter?');
   const [pollOptions, setPollOptions] = useState(['Equity', 'Fixed Income', 'Alts', 'Crypto']);
@@ -12,7 +13,12 @@ const Poll = () => {
     // Submit the response to your server or handle it locally here
   };
 
-  const handleContinuePress = () => {navigation.navigate('ShowResults')};
+  const handleContinuePress = () => {
+    if (selectedOption) {navigation.navigate('Profile');
+  } else {
+    alert('Please select an answer');
+  }
+};
 
   return (
     <View style={styles.container}>

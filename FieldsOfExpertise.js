@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { View, Image, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
+import { View, Image, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ProgressBar from './ProgressBar';
+import axios from 'axios';
+import { KeyboardAvoidingView } from 'react-native';
+import { Platform } from 'react-native';
 
 const FieldsOfExpertise = () => {
   const navigation = useNavigation(); 
@@ -22,8 +25,18 @@ const FieldsOfExpertise = () => {
   { id: 'alternatives', name: 'Alts' },
   ];
 
-  const handleContinuePress = () => {
-    if (selectedCategories.length > 0) {navigation.navigate('WorkHistory');
+  const handleContinuePress = async () => {
+    if (selectedCategories.length > 0) {
+      try {
+        // Replace with your actual API endpoint
+        const response = await axios.post('https://yourbackend.com/api/user/expertise', {
+          categories: selectedCategories.map(category => category.id)
+        });
+      navigation.navigate('WorkHistory');
+    } catch (error) {
+    console.error('Error saving expertise:', error);
+    alert('Failed to save expertise.');
+}
   } else {
     alert('Please select at least one field of expertise.');
   }
@@ -61,7 +74,7 @@ const FieldsOfExpertise = () => {
 
 
 return (
-<View style={styles.container}>
+<View style={styles.container} keyboardDismissMode='on-drag' contentContainerStyle={styles.contentContainer}>
 <View style={styles.topBar}>
   <Image 
     source={require('./assets/logo.png')}
@@ -109,8 +122,7 @@ const styles = StyleSheet.create({
       width: '100%', 
       paddingVertical: 10, 
       backgroundColor: '#171C24', 
-      alignItems: 'left', 
-      marginLeft: 40,
+      alignItems: 'center', 
     },
     logo: {
       width: 100, 

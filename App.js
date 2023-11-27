@@ -18,9 +18,8 @@ const Stack = createNativeStackNavigator();
 export default function App () {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LetsBegin">
+      <Stack.Navigator initialRouteName="Poll">
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="LogInSignUp" component={LogInSignUp} />
         <Stack.Screen name="LetsBegin" component={LetsBegin} />
         <Stack.Screen name="FieldsOfExpertise" component={FieldsOfExpertise} />
         <Stack.Screen name="WorkHistory" component={WorkHistory} />
@@ -31,6 +30,7 @@ export default function App () {
         <Stack.Screen name="Poll" component={Poll} />
         <Stack.Screen name="ShowResults" component={ShowResults} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="LogInSignUp" component={LogInSignUp} />
       </Stack.Navigator>
     </NavigationContainer>
   );

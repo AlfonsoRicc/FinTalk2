@@ -6,7 +6,9 @@ import CustomButton from './Button';
 
 const Home = () => {
   const navigation = useNavigation(); 
-
+  const handleCustomButton = () => {
+    navigation.navigate('LetsBegin')
+  };
     const handleAppleLogin = () => {
       console.log('Apple Login pressed!');
       navigation.navigate('LogInSignUp');
@@ -30,9 +32,9 @@ return (
       <Text style={styles.textSecondary}>Finally</Text>
       <Text style={styles.subtitle}>We built a place where financial professionals can have an impact </Text>
       </View>
-      <CustomButton title="Share Your Knowledge" />
+      <CustomButton title="Share Your Knowledge" onPress={() => navigation.navigate('LetsBegin')}/>
       <View style={styles.footer}>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <TouchableOpacity onPress={() => navigation.navigate('LetsBegin')}>
           <Text style={styles.loginText}>
             Already have an account? <Text style={styles.loginLink}>Log in</Text>
           </Text>

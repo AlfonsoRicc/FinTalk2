@@ -157,9 +157,11 @@ const styles = StyleSheet.create({
     },
     itemSelected: {
       backgroundColor: '#54D7B7',
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
+      padding: 10,
+      marginVertical: 4,
+      marginHorizontal: 4,
+      width: '35%',
+      borderRadius: 5,
     },
     itemText: {
       fontSize: 10,

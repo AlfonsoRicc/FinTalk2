@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
 const LogInSignUp = () => {
   const navigation = useNavigation(); 
@@ -8,9 +9,24 @@ const LogInSignUp = () => {
   const [password, setPassword] = useState('');
   const [isButtonEnabled, setButtonEnabled] = useState(false);
 
-  const validateEmail = (email) => {
-    const re = /\S+@\S+\.\S+/;
-    return re.test(email);
+  const handleRegister = async () => {
+    if (!email || !password) {
+      Alert.alert('Please enter both email and password');
+      return;
+    }
+
+    try {
+      const response = await axios.post('https://yourbackend.com/api/register', {
+        email: email,
+        password: password,
+      });
+      // Handle response, navigate or show message
+      Alert.alert('Success', 'Account created successfully');
+      navigation.navigate('LetsBegin');
+    } catch (error) {
+      // Handle error, show message
+      Alert.alert('Error', error.message);
+    }
   };
 
   const handleEmailChange = (text) => {
@@ -42,17 +58,18 @@ const LogInSignUp = () => {
       <TextInput
         style={styles.input}
         placeholder="Enter your email"
-        keyboardType="email-address"
-        onChangeText={handleEmailChange}
+        value={email}
+        onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
-        placeholder="Choose a password"
-        keyboardType='password'
-        onChangeText={handleEmailChange}
-        />
-      <TouchableOpacity style={styles.button} onPress={handleCreateAccountPress}>
-      <Text style={styles.buttonText}>Start Your Journey</Text>
+        placeholder="Enter your password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <TouchableOpacity style={styles.button} onPress={handleCreateAccountPress} disabled={!isButtonEnabled}>
+      <Text style={styles.buttonText}>Create Account</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.smallButton} onPress={() => { navigation.navigate('Home') }}>
         <Text style={styles.smallButtonText}>Back</Text>

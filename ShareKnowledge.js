@@ -30,8 +30,16 @@ const ShareKnowledge = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.topBar}>
+      <Image 
+      source={require('./assets/logo.png')}
+      style={styles.logo}
+      /> 
+      </View>
     <ProgressBar steps={steps} currentStep={currentStep} />
      <Text style={styles.step1}>STEP 5</Text>
+     <View style={styles.textWrapper}>
+          <Text style={styles.textPrimary}>Share Your Daily Knowledge Tidbit</Text>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.titleInput}
@@ -65,6 +73,7 @@ const ShareKnowledge = () => {
         <Text style={styles.submitButtonText}>SUBMIT</Text>
       </TouchableOpacity>
     </View>
+    </View>
   );
 };
 
@@ -77,14 +86,20 @@ const styles = StyleSheet.create({
   topBar: {
     width: '100%', 
     paddingVertical: 10, 
-    backgroundColor: '#171C24', 
+    backgroundColor: '#8FA3C8', 
     alignItems: 'center', 
-    marginLeft: 40,
   },
   logo: {
     width: 100, 
     height: 50, 
     resizeMode: 'contain', 
+  },
+  textPrimary: {
+    fontSize: 20,
+    color: "#171C24",
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: 20,
   },
   step1: {
     fontSize: 12,

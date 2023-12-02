@@ -27,7 +27,6 @@ return (
     <ProgressBar steps={steps} currentStep={currentStep} />
      <Text style={styles.step1}>STEP 4</Text>
       <Text style={styles.textPrimary}>Get your expertise verified to stand out</Text>
-        <Text style={styles.subtitle}>Are you an expert in your field? Get Verified!</Text>
       <Text style={styles.subtitle}>Social verification links</Text>
       <Text style={styles.subtitle}>Add some links that prove your expertise</Text>
       <TextInput 

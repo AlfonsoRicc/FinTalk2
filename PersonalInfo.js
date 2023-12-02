@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ProgressBar from './ProgressBar';
 
@@ -8,10 +8,11 @@ const PersonalInfo = () => {
   const steps = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5']; 
   const currentStep = 3;
     
-  const [firstName, setFirstName] = useState('');
+    const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [bio, setBio] = useState('');
     const [image, setImage] = useState(null);
+    const [link, setLink] = useState(''); 
 
   const handleContinuePress = () => {navigation.navigate('Verification')};
 
@@ -30,6 +31,7 @@ const PersonalInfo = () => {
 
 
 return (
+  <ScrollView>
 <View style={styles.container}>
 <View style={styles.topBar}>
   <Image 
@@ -44,7 +46,7 @@ return (
   </View>
   <View style={styles.imagePlaceholder}>
   <TouchableOpacity onPress={pickImage}>
-          <Text>Upload Image</Text>
+          <Text style={styles.placeholderText}>Upload Image</Text>
         </TouchableOpacity>
         {image && <Image source={{ uri: image }} style={{ width : 100, height: 100 }} />}
       </View>
@@ -53,24 +55,37 @@ return (
         value={firstName}
         onChangeText={setFirstName}
         placeholder="First Name"
+      placeholderTextColor='#171C24'
       />
       <TextInput 
         style={styles.input}
         value={lastName}
         onChangeText={setLastName}
         placeholder="Last Name"
+        placeholderTextColor='#171C24'
       />
       <TextInput
         style={styles.inputLarge}
         value={bio}
         onChangeText={setBio}
-        placeholder="Significant work experiences (optional)"
+        placeholder="Share a significant work experience (optional)"
         multiline
+        placeholderTextColor='#171C24'
       />
+      <TextInput
+        style={styles.inputLink}
+        value={link}
+        onChangeText={setLink}
+        placeholder="Link to your favorite author (optional)"
+        placeholderTextColor='#171C24'
+      />
+      <View>
       <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
     </View>
+    </View>
+    </ScrollView>
   );
 };
 
@@ -99,7 +114,7 @@ const styles = StyleSheet.create({
       width: "80%",
     },
     placeholder: {
-      color: "#FFFFFF"
+      color: "#FFFFFF",
     },
     textPrimary: {
       fontSize: 20,
@@ -108,8 +123,8 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     },
     imagePlaceholder: {
-      width: 150, // Set a fixed width
-      height: 150, // Set a fixed height
+      width: 200, // Set a fixed width
+      height: 200, // Set a fixed height
       backgroundColor: '#E0E0E0', // A light grey color
       justifyContent: 'center', // Center the content vertically
       alignItems: 'center', // Center the content horizontally
@@ -121,20 +136,28 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     },
     uploadedImage: {
-      width: '100%', // Take full width of the container
-      height: '100%', // Take full height of the container
-      borderRadius: 10, // Maintain the same borderRadius as the container
+      width: '100%', 
+      height: '100%', 
+      borderRadius: 10,
     },
     input: {
-        backgroundColor: '#8FA3C8',
+        backgroundColor: '#FFFFFF',
         padding: 10,
         marginVertical: 4,
         marginHorizontal: 4,
         width: '70%',
         borderRadius: 5,
     },
+    inputLink: {
+      backgroundColor: '#FFFFFF',
+      padding: 10,
+      marginVertical: 4,
+      marginHorizontal: 4,
+      width: '70%',
+      borderRadius: 5,
+    },
     inputLarge: {
-        backgroundColor: '#8FA3C8',
+        backgroundColor: '#FFFFFF',
         padding: 10,
         marginVertical: 50,
         marginHorizontal: 4,
@@ -170,13 +193,12 @@ const styles = StyleSheet.create({
       color: 'red',
     },
     button: {
-      marginTop: 20, 
+      marginTop: 100, 
       backgroundColor: '#8FA3C8', 
       padding: 10,
       borderRadius: 5,
-      width: '80%', 
+      width: 350, 
       alignItems: 'center',
-      position: 'absolute', 
       bottom: 50, 
       alignSelf: 'center',  
     },

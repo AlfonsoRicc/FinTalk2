@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { navigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const Poll = ({ navigation }) => {
   // Example poll data
@@ -14,7 +14,10 @@ const Poll = ({ navigation }) => {
   };
 
   const handleContinuePress = () => {
-    if (selectedOption) {navigation.navigate('Profile');
+    if (selectedOption) {navigation.navigate('ShowResults', {
+      pollQuestion: pollQuestion,
+      selectedOption: selectedOption,
+    });
   } else {
     alert('Please select an answer');
   }

@@ -7,7 +7,7 @@ const CustomButton = ({ title, onPress, navigateTo }) => {
 
   const handlePress = () => {
     console.log('Button pressed!');
-      navigation.navigate('LogInSignUp');
+      navigation.navigate('LetsBegin');
     }
 
   return (

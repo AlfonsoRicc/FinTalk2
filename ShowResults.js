@@ -1,8 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { navigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-const ShowResults = ({ pollQuestion, pollOptions }) => {
+const ShowResults = ({ route, navigation }) => {
+  const { pollQuestion, selectedOption } = route.params;
+};
+const navigation = useNavigation();
+
+const pollResults = ({ pollQuestion, pollOptions }) => {
   // Example poll results
   // This would typically come from your application's state or backend
   const pollResults = [

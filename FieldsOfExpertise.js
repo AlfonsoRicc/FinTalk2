@@ -19,10 +19,16 @@ const FieldsOfExpertise = () => {
   { id: 'crypto', name: 'Crypto' }, 
   { id: 'EM', name: 'EM' }, 
   { id: 'commodities', name: 'Commodities' }, 
-  { id: 'bottom-up', name: 'Bottom Up' }, 
+  { id: 'fixed_income', name: 'Fixed Income' }, 
   { id: 'risk', name: 'Risk Management' },
   { id: 'corporate_finance', name: 'Corporate Finance'},
   { id: 'alternatives', name: 'Alts' },
+  { id: 'derivatives', name: 'Derivatives' },
+  { id: 'insurance', name: 'Insurance' },
+  { id: 'sustainable', name: 'Sustainable Investing' },
+  { id: 'venture', name: 'Venture Capital'},
+  { id: 'real_estate', name: 'Real Estate' },
+  { id: 'foreign_exchange', name: 'Foreign Exchange'}
   ];
 
   const handleContinuePress = async () => {
@@ -89,7 +95,7 @@ return (
   </View>
     <TextInput
       style={styles.searchBar}
-      placeholder="Search microcategory"
+      placeholder="Search field"
       onChangeText={setSearchTerm}
       value={searchTerm}
       />
@@ -99,7 +105,7 @@ return (
       )}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
-      numColumns={2} 
+      numColumns={3} 
       style={styles.list}
     />
       <TouchableOpacity style={[styles.button, selectedCategories.length === 0 && styles.buttonDisabled]} onPress={handleContinuePress} disabled={selectedCategories.length === 0}>
@@ -108,6 +114,7 @@ return (
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -146,7 +153,7 @@ const styles = StyleSheet.create({
     },
     searchBar: {
       height: 40,
-      width: '80%',
+      width: '90%',
       margin: 12,
       borderWidth: 1,
       padding: 10,
@@ -167,7 +174,7 @@ const styles = StyleSheet.create({
       padding: 10,
       marginVertical: 4,
       marginHorizontal: 4,
-      width: '35%',
+      width: '30%',
       borderRadius: 5,
     },
     itemSelected: {

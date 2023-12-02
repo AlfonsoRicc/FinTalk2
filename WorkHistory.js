@@ -10,15 +10,22 @@ const WorkHistory = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const categories = [ { id: 'sports', name: 'Sports' },
-  { id: 'arts_crafts', name: 'Arts and Crafts' },
-  { id: 'gaming', name: 'Gaming'  },
-  { id: 'culinary_arts', name: 'Culinary Arts' }, 
-  { id: 'travel', name: 'Travel' }, 
-  { id: 'contentCreation', name: 'Content Creation' }, 
-  { id: 'collecting', name: 'Collecting' }, 
-  { id: 'strategy_games', name: 'Strategy Games' },
-  { id: 'outdoor_nature', name: 'Outdoors'},
+  const categories = [
+    { id: 'mergers_acquisitions', name: 'Mergers and Acquisitions' },
+    { id: 'cryptocurrency_blockchain', name: 'Cryptocurrency and Blockchain' },
+    { id: 'financial_modeling_valuation', name: 'Financial Modeling and Valuation' },
+    { id: 'quantitative_analysis', name: 'Quantitative Analysis' },
+    { id: 'credit_risk_management', name: 'Credit Risk Management' },
+    { id: 'financial_regulation_compliance', name: 'Financial Regulation and Compliance' },
+    { id: 'behavioral_economics_finance', name: 'Behavioral Economics in Finance' },
+    { id: 'interest_rate_markets', name: 'Interest Rate Markets and Strategies' },
+    { id: 'portfolio_management_diversification', name: 'Portfolio Management and Diversification' },
+    { id: 'financial_planning_wealth_management', name: 'Financial Planning and Wealth Management' },
+    { id: 'derivative_pricing_hedging', name: 'Derivative Pricing and Hedging Strategies' },
+    { id: 'fintech_innovations', name: 'Fintech Innovations' },
+    { id: 'esg_investing', name: 'Environmental, Social, and Governance (ESG) Investing' },
+    { id: 'market_microstructure', name: 'Market Microstructure' },
+    { id: 'global_macroeconomics', name: 'Global Macroeconomics and its Financial Implications' }
   ];
 
   const handleContinuePress = () => {navigation.navigate('PersonalInfo')};
@@ -65,12 +72,12 @@ return (
     <ProgressBar steps={steps} currentStep={currentStep} />
      <Text style={styles.step1}>STEP 2</Text>
       <View style={styles.textWrapper}>
-          <Text style={styles.textPrimary}>What do you do when you're not working? </Text>
-          <Text style={styles.subtitle}>Your life experience and hobbies define you just as much as the work you do</Text>
+          <Text style={styles.textPrimary}>Let's dig a little deeper </Text>
+          <Text style={styles.subtitle}>Choose the microtopics you are most proficient and passionate about </Text>
   </View>
-    <TextInput
+  <TextInput
       style={styles.searchBar}
-      placeholder="Search hobbies and interests"
+      placeholder="Search field"
       onChangeText={setSearchTerm}
       value={searchTerm}
       />
@@ -80,7 +87,7 @@ return (
       )}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
-      numColumns={2} 
+      numColumns={3} 
       style={styles.list}
     />
       <TouchableOpacity style={[styles.button, selectedCategories.length === 0 && styles.buttonDisabled]} onPress={handleContinuePress} disabled={selectedCategories.length === 0}>
@@ -131,7 +138,7 @@ const styles = StyleSheet.create({
     },
     searchBar: {
       height: 40,
-      width: '80%',
+      width: '90%',
       margin: 12,
       borderWidth: 1,
       padding: 10,
@@ -152,7 +159,7 @@ const styles = StyleSheet.create({
       padding: 10,
       marginVertical: 4,
       marginHorizontal: 4,
-      width: '35%',
+      width: '30%',
       borderRadius: 5,
     },
     itemSelected: {

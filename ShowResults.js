@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import React, { useContext } from 'react';
 
 const ShowResults = ({ route, navigation }) => {
   const { pollQuestion, selectedOption } = route.params;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ProgressBar from './ProgressBar';
+import React, { useContext } from 'react';
 
 const PersonalInfo = () => {
   const navigation = useNavigation(); 
@@ -69,7 +70,7 @@ return (
         value={bio}
         onChangeText={setBio}
         placeholder="Share a significant work experience (optional)"
-        multiline
+        multiline={true}
         placeholderTextColor='#171C24'
       />
       <TextInput

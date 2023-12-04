@@ -6,7 +6,6 @@ import CustomButton from './Button';
 
 const Home = () => {
   const navigation = useNavigation(); { 
-    navigation.navigate('LetsBegin')
   };
 
 

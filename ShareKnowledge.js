@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import ProgressBar from './ProgressBar';
 import { useNavigation } from '@react-navigation/native';
+import React, { useContext } from 'react';
 
 const ShareKnowledge = () => {
   const [title, setTitle] = useState('');
@@ -46,14 +47,17 @@ const ShareKnowledge = () => {
           onChangeText={setTitle}
           value={title}
           placeholder="Give it a title..."
+          clearButtonMode='Always'
         />
         <TextInput
           style={styles.contentInput}
           onChangeText={setContent}
           value={content}
           placeholder="Write down your thoughts..."
-          multiline
-        />
+          multiline={true}
+          maxLength={480}
+          clearButtonMode='Always'
+          />
       </View>
       <View style={styles.postTypeContainer}>
         {postTypes.map((type) => (

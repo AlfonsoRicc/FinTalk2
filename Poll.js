@@ -7,16 +7,23 @@ const Poll = ({ navigation }) => {
   const [pollQuestion, setPollQuestion] = useState('What asset class will be the best performer next quarter?');
   const [pollOptions, setPollOptions] = useState(['Equity', 'Fixed Income', 'Alts', 'Crypto', 'Commodities']);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [voteCounts, setVoteCounts] = useState(pollOptions.reduce((acc, option) => {
+    acc[option] = 0;
+    return acc;
+  }, {}));
 
   const handleOptionPress = (option) => {
     setSelectedOption(option);
-    // Submit the response to your server or handle it locally here
+    setVoteCounts(prevVoteCounts => ({
+      ...prevVoteCounts,
+      [option]: prevVoteCounts[option] + 1
+    }));
   };
+  
 
   const handleContinuePress = () => {
-    if (selectedOption) {navigation.navigate('PersonalInfo', {
-      pollQuestion: pollQuestion,
-      selectedOption: selectedOption,
+    if (selectedOption) {navigation.navigate('ShowResults', {
+      voteCounts: voteCounts
     });
   } else {
     alert('Please select an answer');
@@ -39,10 +46,7 @@ const Poll = ({ navigation }) => {
         </TouchableOpacity>
       ))}
       <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
-    <Text style={styles.buttonText}>Create Profile</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
-    <Text style={styles.buttonText}>Create Profile</Text>
+    <Text style={styles.buttonText}>Show Results</Text>
     </TouchableOpacity>
     </View>
   );

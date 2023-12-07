@@ -1,8 +1,9 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, Image, TouchableOpacity, StyleSheet, } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CustomButton from './Button';
+import { WebView } from 'react-native-webview';
 
 const Home = () => {
   const navigation = useNavigation(); { 
@@ -10,20 +11,28 @@ const Home = () => {
 
 
 return (
+  <ScrollView style={styles.scrollViewStyle}>
     <View style={styles.container}>
       <View style={styles.topBar}>
         <Image 
-          source={require('./assets/logo.png')}
+          source={require('./assets/Fintalk.png')}
           style={styles.logo}
         />
         </View>
       <View style={styles.textWrapper}>
-      <Text style={styles.textPrimary}>Noosk is a place where finance experts can get together,
+      <Text style={styles.textPrimary}>FinTalk is a place where finance experts can get together,
       </Text>
       <Text style={styles.textSecondary}>Finally</Text>
-      <Text style={styles.subtitle}>We built a place where financial professionals can have an impact </Text>
+      <Text style={styles.subtitle}>We built a place where financial professionals can have fun </Text>
       </View>
-      <CustomButton title="Share Your Knowledge" onPress={() => navigation.navigate('LetsBegin')}/>
+      <WebView
+        source={{ uri: 'https://youtu.be/mcsAO9AYc0c?si=R6k7JfMfxQyez8B2' }}
+        style={styles.video}
+        resizeMode="contain"
+        shouldPlay={true}
+        isLooping={true}
+      />
+      <CustomButton title="Share Your Knowledge" onPress={() => navigation.navigate('FieldsOfExpertise')}/>
       <View style={styles.footer}>
         <TouchableOpacity onPress={() => navigation.navigate('LetsBegin')}>
           <Text style={styles.loginText}>
@@ -36,8 +45,8 @@ return (
         </Text>
         </TouchableOpacity>
       </View>
-      <StatusBar style="auto" />
     </View>
+    </ScrollView>
   );
 }
 
@@ -47,7 +56,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#171C24',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingTop: 30,
+    paddingTop: 10,
   },
   topBar: {
     width: '100%', 
@@ -56,19 +65,23 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
   },
   logo: {
-    width: 100, 
-    height: 50, 
+    width: 400, 
+    height: 200, 
     resizeMode: 'contain', 
   },
   textWrapper: {
     padding: 10,
     margin: 20,
-    paddingTop: 100,
   },
   lineContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  video: {
+    width: 250,
+    height: 200,  
+    marginBottom: 50,
   },
   line: {
     flex: 1,
@@ -127,10 +140,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#171C24',
-    padding: 40, 
+    backgroundColor: '#647189',
     alignItems: 'left',
-    padding: 40, 
+    padding: 20, 
     paddingLeft: 30,
   },
   loginText: {

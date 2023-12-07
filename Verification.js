@@ -6,29 +6,25 @@ import { useNavigation } from '@react-navigation/native';
 const Verification = () => {
     const navigation = useNavigation(); 
     const steps = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5']; 
-    const currentStep = 4;
+    const currentStep = 5;
   const [linkedin, setLinkedin] = useState('');
   const [instagram, setSubstack] = useState('');
   const [twitter, setTwitter] = useState('');
-  const [showSocialLinks, setShowSocialLinks] = useState(false);
 
   const handleContinuePress = () => {
-    if (showSocialLinks) { // save or send social links data
-    }
-    navigation.navigate('ShareKnowledge')};
+    navigation.navigate('Home')};
 
 return (
 <View style={styles.container}>
     <View style={styles.topBar}>
     <Image 
-     source={require('./assets/logo.png')}
+     source={require('./assets/Fintalk.png')}
      style={styles.logo}/> 
     </View>
     <ProgressBar steps={steps} currentStep={currentStep} />
-     <Text style={styles.step1}>STEP 4</Text>
+     <Text style={styles.step1}>STEP 5</Text>
       <Text style={styles.textPrimary}>Get your expertise verified to stand out</Text>
       <Text style={styles.subtitle}>Social verification links</Text>
-      <Text style={styles.subtitle}>Add some links that prove your expertise</Text>
       <TextInput 
         style={styles.input}
         value={linkedin}
@@ -47,13 +43,6 @@ return (
         onChangeText={setTwitter}
         placeholder="Twitter profile link"
       />
-      <TouchableOpacity 
-        style={styles.checkboxContainer} onPress={() => setShowSocialLinks(!showSocialLinks)}>
-        <View style={styles.checkbox}>
-          {showSocialLinks && (<Icon name="check" size={20} color="#171C24" />)}
-        </View> 
-        <Text style={styles.checkboxLabel}>Show my social links to my profile</Text>
-      </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
@@ -74,8 +63,7 @@ const styles = StyleSheet.create({
             width: '100%', 
             paddingVertical: 10, 
             backgroundColor: '#171C24', 
-            alignItems: 'left', 
-            marginLeft: 40,
+            alignItems: 'center', 
           },
           logo: {
             width: 100, 

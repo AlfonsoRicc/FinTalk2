@@ -28,7 +28,7 @@ const WorkHistory = () => {
     { id: 'global_macroeconomics', name: 'Global Macroeconomics and its Financial Implications' }
   ];
 
-  const handleContinuePress = () => {navigation.navigate('PersonalInfo')};
+  const handleContinuePress = () => {navigation.navigate('ShareKnowledge')};
 
 
   const handleSelectCategory = (category) => {
@@ -65,7 +65,7 @@ return (
 <View style={styles.container}>
 <View style={styles.topBar}>
   <Image 
-    source={require('./assets/logo.png')}
+    source={require('./assets/Fintalk.png')}
     style={styles.logo}
   /> 
 </View>
@@ -93,7 +93,7 @@ return (
       <TouchableOpacity style={[styles.button, selectedCategories.length === 0 && styles.buttonDisabled]} onPress={handleContinuePress} disabled={selectedCategories.length === 0}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.smallButton} onPress={() => { navigation.navigate('PersonalInfo') }}>
+      <TouchableOpacity style={styles.smallButton} onPress={() => { navigation.navigate('ShareKnowledge') }}>
         <Text style={styles.smallButtonText}>Skip</Text>
       </TouchableOpacity>
     </View>
@@ -113,8 +113,7 @@ const styles = StyleSheet.create({
       width: '100%', 
       paddingVertical: 10, 
       backgroundColor: '#171C24', 
-      alignItems: 'left', 
-      marginLeft: 40,
+      alignItems: 'center', 
     },
     logo: {
       width: 100, 
@@ -167,7 +166,7 @@ const styles = StyleSheet.create({
       padding: 10,
       marginVertical: 4,
       marginHorizontal: 4,
-      width: '35%',
+      width: '30%',
       borderRadius: 5,
     },
     itemText: {

@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ProgressBar from './ProgressBar';
-import React, { useContext } from 'react';
+import * as ImagePicker from 'expo-image-picker';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 const PersonalInfo = () => {
   const navigation = useNavigation(); 
   const steps = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5']; 
-  const currentStep = 3;
+  const currentStep = 4;
     
-    const [firstName, setFirstName] = useState('');
+const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [bio, setBio] = useState('');
     const [image, setImage] = useState(null);
@@ -17,40 +19,58 @@ const PersonalInfo = () => {
 
   const handleContinuePress = () => {navigation.navigate('Verification')};
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+  const deleteImage = () => {
+    setImage(null); 
+  };
 
-    if (!result.cancelled) {
-      setImage(result.uri);
+  const pickImage = async () => {
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+  console.log(result);
+      if (result && result.assets[0] && result.assets[0].uri) {
+        setImage(result.assets[0].uri);
+      }
+    } catch (error) {
+      console.error("Error picking media: ", error);
     }
   };
 
 
 return (
-  <ScrollView>
+  <ScrollView style={styles.scrollView}>
 <View style={styles.container}>
 <View style={styles.topBar}>
   <Image 
-    source={require('./assets/logo.png')}
+    source={require('./assets/Fintalk.png')}
     style={styles.logo}
   /> 
 </View>
     <ProgressBar steps={steps} currentStep={currentStep} />
-     <Text style={styles.step1}>STEP 3</Text>
+     <Text style={styles.step1}>STEP 4</Text>
+
       <View style={styles.textWrapper}>
           <Text style={styles.textPrimary}>Share Some Info About Yourself</Text>
   </View>
+
   <View style={styles.imagePlaceholder}>
-  <TouchableOpacity onPress={pickImage}>
-          <Text style={styles.placeholderText}>Upload Image</Text>
-        </TouchableOpacity>
-        {image && <Image source={{ uri: image }} style={{ width : 100, height: 100 }} />}
+        {image && <Image source={{ uri: image }} style={styles.uploadedImage} />}
+        {!image && (
+          <TouchableOpacity onPress={pickImage} style={styles.uploadButton}>
+            <Icon name='camera' color={'#333333'} size={48} />
+          </TouchableOpacity>
+        )}
       </View>
+      {image && (
+        <TouchableOpacity onPress={deleteImage} style={styles.deleteButton}>
+          <Text style={styles.deleteButtonText}>Delete Image</Text>
+        </TouchableOpacity>
+      )}
+
       <TextInput 
         style={styles.input}
         value={firstName}
@@ -103,8 +123,7 @@ const styles = StyleSheet.create({
       width: '100%', 
       paddingVertical: 10, 
       backgroundColor: '#171C24', 
-      alignItems: 'left', 
-      marginLeft: 40,
+      alignItems: 'center', 
     },
     logo: {
       width: 100, 
@@ -137,8 +156,8 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     },
     uploadedImage: {
-      width: '100%', 
-      height: '100%', 
+      width: "100%", 
+      height: "100%", 
       borderRadius: 10,
     },
     input: {
@@ -192,6 +211,18 @@ const styles = StyleSheet.create({
     itemRemoveText: {
       fontSize: 18,
       color: 'red',
+    },
+    deleteButton: {
+      backgroundColor: '#DD0000', // Example: red background
+      padding: 5,
+      borderRadius: 5,
+      margin: 10,
+      alignItems: 'center',
+      width: "30%",
+    },
+    deleteButtonText: {
+      color: 'white', 
+      fontSize: 16,
     },
     button: {
       marginTop: 100, 

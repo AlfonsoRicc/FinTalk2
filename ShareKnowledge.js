@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import ProgressBar from './ProgressBar';
 import { useNavigation } from '@react-navigation/native';
-import React, { useContext } from 'react';
 
 const ShareKnowledge = () => {
   const [title, setTitle] = useState('');
@@ -10,7 +9,7 @@ const ShareKnowledge = () => {
   const [postType, setPostType] = useState('');
   const navigation = useNavigation(); 
   const steps = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5']; 
-  const currentStep = 5;
+  const currentStep = 3;
 
   const postTypes = [
     { key: 'analysis', text: 'Analysis' },
@@ -33,12 +32,13 @@ const ShareKnowledge = () => {
     <View style={styles.container}>
       <View style={styles.topBar}>
       <Image 
-      source={require('./assets/logo.png')}
+      source={require('./assets/Fintalk.png')}
       style={styles.logo}
       /> 
       </View>
+      <ScrollView>
     <ProgressBar steps={steps} currentStep={currentStep} />
-     <Text style={styles.step1}>STEP 5</Text>
+     <Text style={styles.step1}>STEP 3</Text>
      <View style={styles.textWrapper}>
           <Text style={styles.textPrimary}>Share Your Daily Knowledge Tidbit</Text>
       <View style={styles.inputContainer}>
@@ -77,6 +77,7 @@ const ShareKnowledge = () => {
         <Text style={styles.submitButtonText}>SUBMIT</Text>
       </TouchableOpacity>
     </View>
+    </ScrollView>
     </View>
   );
 };
@@ -85,12 +86,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#8FA3C8',
+    backgroundColor: '#171C24',
   },
   topBar: {
     width: '100%', 
     paddingVertical: 10, 
-    backgroundColor: '#8FA3C8', 
+    backgroundColor: '#171C24', 
     alignItems: 'center', 
   },
   logo: {
@@ -100,19 +101,19 @@ const styles = StyleSheet.create({
   },
   textPrimary: {
     fontSize: 20,
-    color: "#171C24",
+    color: "#8FA3C8",
     fontWeight: 'bold',
     textAlign: 'center',
     padding: 20,
   },
   step1: {
     fontSize: 12,
-    color: '#171C24',
+    color: '#8FA3C8',
     textAlign: 'center',
     margin: 20,
   },
   inputContainer: {
-    backgroundColor: '#F2F2F2',
+    backgroundColor: '#8FA3C8',
     padding: 10,
     borderRadius: 10,
   },
@@ -134,18 +135,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#171C24',
+    borderColor: '#8FA3C8',
     marginBottom: 10,
   },
   postTypeButtonSelected: {
     backgroundColor: '#54D7B7',
-    borderColor: '#171C24',
+    borderColor: '#8FA3C8',
   },
   postTypeText: {
     textAlign: 'center',
+    color: 'white',
   },
   submitButton: {
-    backgroundColor: '#171C24',
+    backgroundColor: '#8FA3C8',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',

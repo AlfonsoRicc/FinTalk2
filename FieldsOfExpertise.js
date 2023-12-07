@@ -31,18 +31,8 @@ const FieldsOfExpertise = () => {
   { id: 'foreign_exchange', name: 'Foreign Exchange'}
   ];
 
-  const handleContinuePress = async () => {
-    if (selectedCategories.length > 0) {
-      try {
-        // Replace with your actual API endpoint
-        const response = await axios.post('https://yourbackend.com/api/user/expertise', {
-          categories: selectedCategories.map(category => category.id)
-        });
-      navigation.navigate('WorkHistory');
-    } catch (error) {
-    console.error('Error saving expertise:', error);
-    alert('Failed to save expertise.');
-}
+  const handleContinuePress = () => {
+    if (selectedCategories.length > 0 < 3) {navigation.navigate('WorkHistory');
   } else {
     alert('Please select at least one field of expertise.');
   }
@@ -83,14 +73,14 @@ return (
 <View style={styles.container} keyboardDismissMode='on-drag' contentContainerStyle={styles.contentContainer}>
 <View style={styles.topBar}>
   <Image 
-    source={require('./assets/logo.png')}
+    source={require('./assets/Fintalk.png')}
     style={styles.logo}
   /> 
 </View>
     <ProgressBar steps={steps} currentStep={currentStep} />
      <Text style={styles.step1}>STEP 1</Text>
       <View style={styles.textWrapper}>
-          <Text style={styles.textPrimary}>What do you focus on? </Text>
+          <Text style={styles.textPrimary}>What financial topic do you focus on? </Text>
           <Text style={styles.subtitle}>Choose up to three topics where you believe you can be helpful to the community</Text>
   </View>
     <TextInput
@@ -182,7 +172,7 @@ const styles = StyleSheet.create({
       padding: 10,
       marginVertical: 4,
       marginHorizontal: 4,
-      width: '35%',
+      width: '30%',
       borderRadius: 5,
     },
     itemText: {

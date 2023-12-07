@@ -1,16 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React, { useContext } from 'react';
+import { useState, useContext } from 'react';
 
 const ShowResults = ({ route, navigation }) => {
-  const { pollQuestion, selectedOption } = route.params;
-};
-const navigation = useNavigation();
+ const { pollQuestion, selectedOption } = route.params;
+ };
 
-const pollResults = ({ pollQuestion, pollOptions }) => {
-  // Example poll results
-  // This would typically come from your application's state or backend
+ const pollResults = ({ pollQuestion, pollOptions }) => {
   const pollResults = [
     { option: 'Equity', votes: 150 },
     { option: 'Fixed Income', votes: 200 },
@@ -21,6 +18,7 @@ const pollResults = ({ pollQuestion, pollOptions }) => {
   const totalVotes = pollResults.reduce((acc, option) => acc + option.votes, 0);
 
   const handleContinuePress = () => {
+    const navigation = useNavigation();
     navigation.navigate('Profile');
   };
 

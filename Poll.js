@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React, { useContext } from 'react';
 
 const Poll = ({ navigation }) => {
   // Example poll data
-  const [pollQuestion, setPollQuestion] = useState('What is your favorite asset class for the next quarter?');
-  const [pollOptions, setPollOptions] = useState(['Equity', 'Fixed Income', 'Alts', 'Crypto']);
+  const [pollQuestion, setPollQuestion] = useState('What asset class will be the best performer next quarter?');
+  const [pollOptions, setPollOptions] = useState(['Equity', 'Fixed Income', 'Alts', 'Crypto', 'Commodities']);
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionPress = (option) => {
@@ -15,7 +14,7 @@ const Poll = ({ navigation }) => {
   };
 
   const handleContinuePress = () => {
-    if (selectedOption) {navigation.navigate('ShowResults', {
+    if (selectedOption) {navigation.navigate('PersonalInfo', {
       pollQuestion: pollQuestion,
       selectedOption: selectedOption,
     });
@@ -26,6 +25,9 @@ const Poll = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+          <Image 
+     source={require('./assets/Fintalk.png')}
+     style={styles.logo}/> 
       <Text style={styles.pollQuestion}>{pollQuestion}</Text>
       {pollOptions.map((option, index) => (
         <TouchableOpacity
@@ -37,7 +39,10 @@ const Poll = ({ navigation }) => {
         </TouchableOpacity>
       ))}
       <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
-    <Text style={styles.buttonText}>Show Results</Text>
+    <Text style={styles.buttonText}>Create Profile</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
+    <Text style={styles.buttonText}>Create Profile</Text>
     </TouchableOpacity>
     </View>
   );
@@ -50,6 +55,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 20,
     backgroundColor: '#8FA3C8',
+  },
+  logo: {
+    width: 200, 
+    height: 100, 
+    resizeMode: 'contain', 
+    marginBottom: 40,
   },
   pollQuestion: {
     fontSize: 20,

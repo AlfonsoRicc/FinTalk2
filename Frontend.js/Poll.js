@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
 const Poll = ({ navigation }) => {
   // Example poll data
@@ -21,14 +22,33 @@ const Poll = ({ navigation }) => {
   };
   
 
-  const handleContinuePress = () => {
-    if (selectedOption) {navigation.navigate('ShowResults', {
-      voteCounts: voteCounts
-    });
-  } else {
-    alert('Please select an answer');
-  }
-};
+  const handleContinuePress = async () => {
+    if (selectedOption) {
+      try {
+        // Replace with your actual backend API endpoint
+        const endpoint = 'https://your-backend.com/api/poll-results';
+
+        // Prepare the data to be sent
+        const pollData = {
+          question: pollQuestion,
+          selectedOption,
+          voteCounts,
+        };
+
+        // Send a POST request to the endpoint
+        await axios.post(endpoint, pollData);
+
+        // Navigate with the vote counts
+        navigation.navigate('ShowResults', { voteCounts });
+      } catch (error) {
+        // Handle any errors that occur during the request
+        console.error("Error submitting poll: ", error);
+        Alert.alert('Error', 'An error occurred while submitting your poll. Please try again.');
+      }
+    } else {
+      Alert.alert('Error', 'Please select an answer');
+    }
+  };
 
   return (
     <View style={styles.container}>

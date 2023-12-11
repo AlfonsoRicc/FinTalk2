@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import ProgressBar from './ProgressBar';
 import * as ImagePicker from 'expo-image-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import axios from 'axios';
+import * as FileSystem from 'expo-file-system';
 
 
 const PersonalInfo = () => {
@@ -17,7 +19,45 @@ const [firstName, setFirstName] = useState('');
     const [image, setImage] = useState(null);
     const [link, setLink] = useState(''); 
 
-  const handleContinuePress = () => {navigation.navigate('Verification')};
+    const handleContinuePress = async () => {
+      try {
+        // Replace with your actual backend API endpoint
+        const endpoint = 'https://your-backend.com/api/personal-info';
+  
+        // If an image is selected, convert it to a blob
+        let imageBlob;
+        if (image) {
+          const base64 = await FileSystem.readAsStringAsync(image, { encoding: 'base64' });
+          imageBlob = `data:image/jpg;base64,${base64}`;
+        }
+  
+        // Prepare the data to be sent
+        const userData = {
+          firstName,
+          lastName,
+          bio,
+          link,
+          image: imageBlob,
+        };
+  
+        // Send a POST request to the endpoint
+        const response = await axios.post(endpoint, userData, {
+          headers: { 'Content-Type': 'application/json' },
+        });
+  
+        if (response.status === 200) {
+          // Navigate to the next screen on successful save
+          navigation.navigate('Verification');
+        } else {
+          // Handle any errors that occur during the request
+          alert('Failed to save your information. Please try again.');
+        }
+      } catch (error) {
+        // Handle any errors that occur during the request
+        console.error("Error saving personal info: ", error);
+        alert('An error occurred while saving your information. Please try again.');
+      }
+    };
 
   const deleteImage = () => {
     setImage(null); 

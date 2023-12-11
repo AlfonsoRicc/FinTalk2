@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import ProgressBar from './ProgressBar';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
 const Verification = () => {
     const navigation = useNavigation(); 
@@ -11,8 +12,29 @@ const Verification = () => {
   const [instagram, setSubstack] = useState('');
   const [twitter, setTwitter] = useState('');
 
-  const handleContinuePress = () => {
-    navigation.navigate('Home')};
+  const handleContinuePress = async () => {
+    try {
+      // Replace with your actual backend API endpoint
+      const endpoint = 'https://your-backend.com/api/social-links';
+
+      // Prepare the data to be sent
+      const socialLinksData = {
+        linkedin,
+        instagram,
+        twitter,
+      };
+
+      // Send a POST request to the endpoint
+      await axios.post(endpoint, socialLinksData);
+
+      // Navigate to the Home screen after successful save
+      navigation.navigate('Home');
+    } catch (error) {
+      // Handle any errors that occur during the request
+      console.error("Error submitting social links: ", error);
+      alert('An error occurred while submitting your social links. Please try again.');
+    }
+  };
 
 return (
 <View style={styles.container}>

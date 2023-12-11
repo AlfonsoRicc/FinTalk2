@@ -15,7 +15,7 @@ const ShareKnowledge = () => {
     { key: 'analysis', text: 'Analysis' },
     { key: 'trends', text: 'Latest Trends' },
     { key: 'facts', text: 'Facts and Figures' },
-    { key: 'tips', text: 'Tips and Tricks' },
+    { key: 'tips', text: 'Tips' },
     { key: 'suggestions', text: 'Articles and Books Suggestions'}
   ];
 
@@ -23,9 +23,33 @@ const ShareKnowledge = () => {
     setPostType(type);
   };
 
-  const handleSubmit = () => {
-    console.log({ title, content, postType });
-    navigation.navigate('ThankYou');
+  const handleSubmit = async () => {
+    try {
+      // Replace with your actual backend API endpoint
+      const endpoint = 'https://your-backend.com/api/posts';
+
+      // Prepare the data to be sent
+      const postData = {
+        title,
+        content,
+        postType,
+      };
+
+      // Send a POST request to the endpoint
+      const response = await axios.post(endpoint, postData);
+
+      if (response.status === 200) {
+        // Navigate to the thank you page on successful save
+        navigation.navigate('ThankYou');
+      } else {
+        // Handle any errors that occur during the request
+        alert('Failed to save your post. Please try again.');
+      }
+    } catch (error) {
+      // Handle any errors that occur during the request
+      console.error("Error submitting post: ", error);
+      alert('An error occurred while submitting your post. Please try again.');
+    }
   };
 
   return (

@@ -28,7 +28,30 @@ const WorkHistory = () => {
     { id: 'global_macroeconomics', name: 'Global Macroeconomics and its Financial Implications' }
   ];
 
-  const handleContinuePress = () => {navigation.navigate('ShareKnowledge')};
+  const handleContinuePress = async () => {
+    try {
+      // Replace with your actual backend API endpoint
+      const endpoint = 'https://your-backend.com/api/work-history';
+  
+      // Prepare the data
+      const selectedCategoryIds = selectedCategories.map(category => category.id);
+  
+      // Send a POST request
+      const response = await axios.post(endpoint, { categories: selectedCategoryIds });
+  
+      if (response.status === 200) {
+        // Navigate to the next screen on successful save
+        navigation.navigate('ShareKnowledge');
+      } else {
+        // Handle any errors that occur during the request
+        alert('Failed to save your choices. Please try again.');
+      }
+    } catch (error) {
+      // Handle any errors that occur during the request
+      console.error("Error saving work history: ", error);
+      alert('An error occurred while saving your choices. Please try again.');
+    }
+  };
 
 
   const handleSelectCategory = (category) => {
@@ -88,7 +111,7 @@ return (
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
       numColumns={3} 
-      style={styles.list}
+      style={styles.item}
     />
       <TouchableOpacity style={[styles.button, selectedCategories.length === 0 && styles.buttonDisabled]} onPress={handleContinuePress} disabled={selectedCategories.length === 0}>
         <Text style={styles.buttonText}>Continue</Text>

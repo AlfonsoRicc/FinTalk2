@@ -13,6 +13,7 @@ import  ShowResults from './ShowResults';
 import  Profile from './Profile'
 import  LogInSignUp  from './LogInSignUp'; 
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App () {

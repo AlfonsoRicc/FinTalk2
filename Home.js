@@ -23,7 +23,7 @@ return (
       <Text style={styles.textPrimary}>FinTalk is a place where finance experts can get together,
       </Text>
       <Text style={styles.textSecondary}>Finally</Text>
-      <Text style={styles.subtitle}>We built a place where financial professionals can have fun </Text>
+      <Text style={styles.subtitle}>We built a place where financial professionals can enjoy their conversations </Text>
       </View>
       <WebView
         source={{ uri: 'https://youtu.be/mcsAO9AYc0c?si=R6k7JfMfxQyez8B2' }}
